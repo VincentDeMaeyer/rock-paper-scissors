@@ -1,15 +1,5 @@
-//1. make randomNumber put out a random number
-//2. If randomNumber is smaller than or equal to 0,33 return rock
-//3. If randomNumber is larger than or equal to 0,34 and smaller than or equal to 0,66 return paper
-//4. If randomNumber is larger than or equal to 0,67 return scissors
-
-//let getComputerChoice = Math.random()
-
-//if (getComputerChoice <= 0,33){console.log("rock")}
-
-//else if (getComputerChoice >= 0,34){console.log("paper")}
-
-//else if (getComputerChoice >= 0,67){console.log("scissors")}
+let humanScore = 0
+let computerScore = 0
 
 function getComputerChoice() {
     let random = Math.random();
@@ -18,4 +8,47 @@ function getComputerChoice() {
     else if (random >= 0.67){return 'scissors'}
 }
 
-console.log(getComputerChoice())
+function getHumanChoice() {
+    return prompt('Please enter rock, paper or scissors')
+}
+
+function playRound() {
+    // Get the choices once per round
+    let humanChoice = getHumanChoice();
+    let computerChoice = getComputerChoice();
+
+    console.log(`You chose: ${humanChoice}`);
+    console.log(`Computer chose: ${computerChoice}`);
+
+    // Compare choices
+    if (humanChoice === computerChoice) {
+        console.log("It's a tie!");
+    } else if (
+        (humanChoice === 'rock' && computerChoice === 'scissors') ||
+        (humanChoice === 'paper' && computerChoice === 'rock') ||
+        (humanChoice === 'scissors' && computerChoice === 'paper')
+    ) {
+        console.log("You win!");
+        humanScore++;
+    } else if (
+        (humanChoice === 'rock' && computerChoice === 'paper') ||
+        (humanChoice === 'paper' && computerChoice === 'scissors') ||
+        (humanChoice === 'scissors' && computerChoice === 'rock')
+    ) {
+        console.log("You lose!");
+        computerScore++;
+    } else {
+        console.log("Invalid input! Please enter rock, paper, or scissors.");
+    }
+
+    console.log(`Score - You: ${humanScore}, Computer: ${computerScore}`);
+    console.log('-----------------------------');
+}
+
+
+function playGame(){
+    for(let i = 0; i < 5; i++){
+    playRound()}
+}
+
+playGame()
